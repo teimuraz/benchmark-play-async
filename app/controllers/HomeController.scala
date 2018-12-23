@@ -42,7 +42,6 @@ class HomeController @Inject()(requestService: RequestService, cc: ControllerCom
     )
 
     Future.sequence(futures).map{_ =>
-      println("All done")
       Ok("Done")
     }
   }

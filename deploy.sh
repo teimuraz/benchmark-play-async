@@ -2,6 +2,6 @@ rm -rf target/universal/benchmark-play-1.0-snapshot
 rm target/universal/benchmark-play-1.0-snapshot.zip
 sbt dist &&
 cd target/universal/ &&
-unzip benchmark-play-1.0-snapshot.zip
+unzip benchmark-play-1.0-SNAPSHOT.zip
 cd benchmark-play-1.0-SNAPSHOT/bin &&
-./benchmark-play  -Dplay.http.secret.key=mysupersecret
+./benchmark-play  -Dplay.http.secret.key=mysupersecret -J-Xms2048M -J-Xmx2048m
