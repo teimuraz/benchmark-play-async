@@ -14,7 +14,7 @@ class HomeController @Inject()(requestService: RequestService, cc: ControllerCom
 
 
   def index() = Action { implicit request: Request[AnyContent] =>
-    Ok(views.html.index())
+    Ok("Hi")
   }
 
   val rand = new Random
