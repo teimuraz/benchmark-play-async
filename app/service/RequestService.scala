@@ -10,8 +10,7 @@ import scala.concurrent.{ExecutionContext, Future}
 @Singleton
 class RequestService @Inject()(wsClient: WSClient)(implicit ec: ExecutionContext){
 
-  def makeRequest(url: String): Future[String] = Future {
-    Thread.sleep(1000)
+  def makeRequest(url: String): Future[String] = Future.successful {
     "Done"
 //      wsClient.url(url).get().map { r =>
 //
