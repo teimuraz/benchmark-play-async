@@ -10,16 +10,11 @@ import scala.concurrent.{ExecutionContext, Future}
 @Singleton
 class RequestService @Inject()(wsClient: WSClient)(implicit ec: ExecutionContext){
 
-  def makeRequest(url: String): Future[String] = Future.successful {
-    "Done"
-//      wsClient.url(url).get().map { r =>
-//
-//        r.body
-//      }
-//      .recover {
-//        case e => ""
-//
-//      }
+  def makeRequest(url: String): Future[String] = {
+      wsClient.url("http://localhost:9000").get().map { r =>
+
+        r.body
+      }
   }
 
 }
