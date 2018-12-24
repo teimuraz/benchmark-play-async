@@ -9,20 +9,10 @@ import service.RequestService
 
 import scala.concurrent.{ExecutionContext, Future}
 
-/**
- * This controller creates an `Action` to handle HTTP requests to the
- * application's home page.
- */
 @Singleton
 class HomeController @Inject()(requestService: RequestService, cc: ControllerComponents)(implicit ec: ExecutionContext) extends AbstractController(cc) {
 
-  /**
-   * Create an Action to render an HTML page.
-   *
-   * The configuration in the `routes` file means that this method
-   * will be called when the application receives a `GET` request with
-   * a path of `/`.
-   */
+
   def index() = Action { implicit request: Request[AnyContent] =>
     Ok(views.html.index())
   }
@@ -30,18 +20,11 @@ class HomeController @Inject()(requestService: RequestService, cc: ControllerCom
   val rand = new Random
 
   def parallelRequests() = Action.async {
-    val futures = Seq(
-      requestService.makeRequest(s"https://emoney.ge?p=${rand.nextInt(99999) + 1}"),
-      requestService.makeRequest(s"https://github.com?p=${rand.nextInt(99999) + 1}"),
-      requestService.makeRequest(s"https://google.com?p=${rand.nextInt(99999) + 1}"),
-      requestService.makeRequest(s"https://twitter.com?p=${rand.nextInt(99999) + 1}"),
-      requestService.makeRequest(s"https://linkedin.com?p=${rand.nextInt(99999) + 1}"),
-      requestService.makeRequest(s"https://dropbox.com?p=${rand.nextInt(99999) + 1}"),
-      requestService.makeRequest(s"https://microsoft.com?p=${rand.nextInt(99999) + 1}"),
-      requestService.makeRequest(s"https://ebay.com?p=${rand.nextInt(99999) + 1}"),
+    val futures = (1 to 10).map( _ =>
+      requestService.makeRequest(s"http://3.17.161.135:9000?p=${rand.nextInt(99999) + 1}"),
     )
 
-    Future.sequence(futures).map{_ =>
+    Future.sequence(futures).map{ _ =>
       Ok("Done")
     }
   }
