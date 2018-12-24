@@ -11,13 +11,8 @@ import scala.concurrent.{ExecutionContext, Future}
 class RequestService @Inject()(wsClient: WSClient)(implicit ec: ExecutionContext){
 
   def makeRequest(url: String): Future[String] = {
-      wsClient.url(url).get().map { r =>
-
+      wsClient.url("http://3.17.161.135:9000").get().map { r =>
         r.body
-      }
-      .recover {
-        case e => ""
-
       }
   }
 
