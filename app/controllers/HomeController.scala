@@ -21,7 +21,7 @@ class HomeController @Inject()(requestService: RequestService, cc: ControllerCom
 
   def parallelRequests() = Action.async {
     val futures = (1 to 10).map( _ =>
-      requestService.makeRequest(s"http://52.42.198.2:8080?p=${rand.nextInt(99999) + 1}"),
+      requestService.makeRequest(s"http://controller/?p=${rand.nextInt(99999) + 1}"),
     )
 
     Future.sequence(futures).map{ _ =>
